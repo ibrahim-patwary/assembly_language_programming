@@ -1,0 +1,43 @@
+INCLUDE 'EMU8086.INC'
+.MODEL SMALL
+
+.STACK 100H
+
+.DATA
+
+AGE DB ?
+
+MSG DW 'MY NAME IS IBRAHIM PATWARY $'   
+
+.CODE
+
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS ,AX 
+    
+    PRINT 'ENTER YOUR AGE: '
+    MOV AH,1
+    INT 21H
+    
+    MOV AGE,AL
+    SUB AGE,48
+    PRINTN
+    PRINT 'I AM ' 
+    MOV AH,2
+    MOV DL,AGE
+    ADD DL,48
+    INT 21H
+    PRINT ' YEARS OLD'
+    PRINTN
+    MOV AH,9
+    LEA DX,MSG
+    INT 21H
+    
+
+    
+    
+    EXIT:
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP 
+END MAIN
